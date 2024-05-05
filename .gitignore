@@ -50,4 +50,3 @@ ignore
 lib/screens
 lib/auth
 lib/assets
-lib/services
