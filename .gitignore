@@ -48,7 +48,6 @@ ignore
 
 
 lib/screens
-lib/components
 lib/auth
 lib/assets
 lib/services
