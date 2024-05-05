@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mymeds_app/auth/auth_page.dart';
 
-import '../screens/dashboard.dart';
-import '../screens/email_verify.dart';
+import '../../ignore/dashboard.dart';
+import '../../ignore/email_verify.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});

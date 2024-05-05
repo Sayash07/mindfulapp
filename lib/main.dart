@@ -83,7 +83,7 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Color.fromARGB(255, 241, 244, 244),
         ),
         // colorSchemeSeed: const Color.fromRGBO(7, 82, 96, 1),
-        colorSchemeSeed: Color.fromARGB(255, 5, 104, 50),
+        colorSchemeSeed: const Color.fromARGB(255, 5, 104, 50),
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
