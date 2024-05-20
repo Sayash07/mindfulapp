@@ -38,9 +38,26 @@ class _AddMedication1State extends State<AddMedication1> {
     // Implement your image picker logic here
     // This function will be called when the image is clicked
   }
+
+  void _resetForm() {
+    _formKey.currentState?.reset();
+    _medicationNameController.clear();
+    _medicationTypeController.clear();
+    _medicationStrengthValueController.clear();
+    _medicationStrengthController.clear();
+    setState(() {
+      _selectedCategoryIndex = -1;
+      widget.categories.forEach((category) {
+        category.boxColor = const Color.fromARGB(255, 158, 158, 158);
+        category.isSelected = false;
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    _resetForm();
     focusNode_medName = FocusNode();
     focusNode_medStrengthValue = FocusNode();
   }
@@ -59,6 +76,60 @@ class _AddMedication1State extends State<AddMedication1> {
   //   super.dispose();
   // }
 
+  // void goToNextPage() {
+  //   if (_medicationNameController.text.isEmpty) {
+  //     focusNode_medName.requestFocus();
+  //   } else if (_selectedCategoryIndex < 0) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         backgroundColor: const Color.fromARGB(255, 7, 83, 96),
+  //         behavior: SnackBarBehavior.floating,
+  //         duration: const Duration(seconds: 2),
+  //         content: Text(
+  //           translation(context).pstMedCategory,
+  //         ),
+  //       ),
+  //     );
+  //   } else {
+  //     if (_medicationStrengthValueController.text.isNotEmpty &&
+  //         _medicationStrengthController.text.isEmpty) {
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(
+  //           backgroundColor: const Color.fromARGB(255, 7, 83, 96),
+  //           behavior: SnackBarBehavior.floating,
+  //           duration: const Duration(seconds: 2),
+  //           content: Text(
+  //             translation(context).pstStrType,
+  //           ),
+  //         ),
+  //       );
+  //     } else if (_medicationStrengthValueController.text.isEmpty &&
+  //         _medicationStrengthController.text.isNotEmpty) {
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(
+  //           backgroundColor: const Color.fromARGB(255, 7, 83, 96),
+  //           behavior: SnackBarBehavior.floating,
+  //           duration: const Duration(seconds: 2),
+  //           content: Text(
+  //             translation(context).pstStrType,
+  //           ),
+  //         ),
+  //       );
+  //     } else {
+  //       //print all controller values
+  //       print(_medicationNameController.text);
+  //       print(_medicationTypeController.text);
+  //       print(_medicationStrengthValueController.text +
+  //           _medicationStrengthController.text);
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (context) => AddMedication2(),
+  //         ),
+  //       );
+  //     }
+  //   }
+  // }
   void goToNextPage() {
     if (_medicationNameController.text.isEmpty) {
       focusNode_medName.requestFocus();
@@ -109,7 +180,9 @@ class _AddMedication1State extends State<AddMedication1> {
           MaterialPageRoute(
             builder: (context) => AddMedication2(),
           ),
-        );
+        ).then((_) {
+          _resetForm();
+        });
       }
     }
   }

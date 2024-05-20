@@ -190,63 +190,64 @@ class _UserProfileState extends State<UserProfile> {
                     ),
 
                     //date of birth
-                    TextField(
-                      onTap: () async {
-                        var datePicked = await DatePicker.showSimpleDatePicker(
-                          context,
-                          titleText: 'Select your birthday',
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime(2099),
-                          dateFormat: "dd-MMMM-yyyy",
-                          locale: DateTimePickerLocale.en_us,
-                          looping: true,
-                        );
-                        String date =
-                            '${datePicked?.day}-${datePicked?.month}-${datePicked?.year}';
+                    // TextField(
+                    //   onTap: () async {
+                    //     var datePicked = await DatePicker.showSimpleDatePicker(
+                    //       context,
+                    //       titleText: 'Select your birthday',
+                    //       initialDate: DateTime.now(),
+                    //       firstDate: DateTime(1900),
+                    //       lastDate: DateTime(2099),
+                    //       dateFormat: "dd-MMMM-yyyy",
+                    //       locale: DateTimePickerLocale.en_us,
+                    //       looping: true,
+                    //       pickerMode: DateTimePickerMode.date,
+                    //     );
+                    //     String date =
+                    //         '${datePicked?.day}-${datePicked?.month}-${datePicked?.year}';
 
-                        setState(() {
-                          _dobController = TextEditingController(text: date);
-                        });
-                      },
-                      controller: _dobController,
-                      readOnly: true,
-                      style: GoogleFonts.roboto(
-                        height: 2,
-                        color: const Color.fromARGB(255, 16, 15, 15),
-                      ),
-                      cursorColor: const Color.fromARGB(255, 7, 82, 96),
-                      decoration: InputDecoration(
-                        hintText: 'DD-MM-YYYY',
-                        labelText: 'Date of Birth',
-                        labelStyle: GoogleFonts.roboto(
-                          color: const Color.fromARGB(255, 16, 15, 15),
-                        ),
-                        filled: true,
-                        floatingLabelBehavior: FloatingLabelBehavior.auto,
-                        // fillColor: Colors.white,
-                        focusedBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(
-                              20,
-                            ),
-                          ),
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(255, 7, 82, 96),
-                          ),
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(
-                              20,
-                            ),
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                          ),
-                        ),
-                      ),
-                    ),
+                    //     setState(() {
+                    //       _dobController = TextEditingController(text: date);
+                    //     });
+                    //   },
+                    //   controller: _dobController,
+                    //   readOnly: true,
+                    //   style: GoogleFonts.roboto(
+                    //     height: 2,
+                    //     color: const Color.fromARGB(255, 16, 15, 15),
+                    //   ),
+                    //   cursorColor: const Color.fromARGB(255, 7, 82, 96),
+                    //   decoration: InputDecoration(
+                    //     hintText: 'DD-MM-YYYY',
+                    //     labelText: 'Date of Birth',
+                    //     labelStyle: GoogleFonts.roboto(
+                    //       color: const Color.fromARGB(255, 16, 15, 15),
+                    //     ),
+                    //     filled: true,
+                    //     floatingLabelBehavior: FloatingLabelBehavior.auto,
+                    //     // fillColor: Colors.white,
+                    //     focusedBorder: const OutlineInputBorder(
+                    //       borderRadius: BorderRadius.all(
+                    //         Radius.circular(
+                    //           20,
+                    //         ),
+                    //       ),
+                    //       borderSide: BorderSide(
+                    //         color: Color.fromARGB(255, 7, 82, 96),
+                    //       ),
+                    //     ),
+                    //     enabledBorder: const OutlineInputBorder(
+                    //       borderRadius: BorderRadius.all(
+                    //         Radius.circular(
+                    //           20,
+                    //         ),
+                    //       ),
+                    //       borderSide: BorderSide(
+                    //         color: Colors.transparent,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
 
                     const SizedBox(
                       height: 15,
@@ -397,7 +398,7 @@ class _UserProfileState extends State<UserProfile> {
                       hint: 'No, Street, City',
                       isPassword: false,
                       keyboard: TextInputType.text,
-                      txtEditController: _nicController,
+                      txtEditController: _addressController,
                       focusNode: FocusNode(),
                     ),
 
@@ -410,7 +411,7 @@ class _UserProfileState extends State<UserProfile> {
                       hint: '07XXXXXXXX',
                       isPassword: false,
                       keyboard: TextInputType.text,
-                      txtEditController: _nicController,
+                      txtEditController: _mobileController,
                       focusNode: FocusNode(),
                     ),
                     const SizedBox(

@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "1072054298146",
-    "project_id": "medicationaitc",
-    "storage_bucket": "medicationaitc.appspot.com"
+    "project_number": "579594683262",
+    "project_id": "mindfulmeds-3143c",
+    "storage_bucket": "mindfulmeds-3143c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1072054298146:android:3c3374704d9078ccb44c7b",
+        "mobilesdk_app_id": "1:579594683262:android:983d3a73d8e551dc25e92f",
         "android_client_info": {
           "package_name": "health.mymeds.app.mymeds_app"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCfaSyFSn1YzXGjcuHHUfBhP4wXrGXsn-A"
+          "current_key": "AIzaSyCaBO5CtUd12aRBWmE-J6Q_nNRILb13TPY"
         }
       ],
       "services": {

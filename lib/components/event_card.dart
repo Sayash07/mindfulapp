@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -88,10 +90,30 @@ class EventCard extends StatelessWidget {
         .collection('Medications');
     List<String> dateStr = selectedDate.split('-');
 
-    if (DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day) ==
-        DateTime(int.parse(dateStr[0]), int.parse(dateStr[1]),
-            int.parse(dateStr[2]))) {
+    log('dateStr: $time');
+
+    // if (DateTime(
+    //         DateTime.now().year, DateTime.now().month, DateTime.now().day) ==
+    //     DateTime(int.parse(dateStr[0]), int.parse(dateStr[1]),
+    //         int.parse(dateStr[2]))) {
+    //   if (isTaken) {
+    //     takenTxt = 'Taken';
+    //     takenIcon = Icons.done;
+    //   } else {
+    //     takenTxt = 'Missed';
+    //     takenIcon = Icons.close;
+    //   }
+    // } else {
+    //   takenTxt = 'Not yet';
+    //   takenIcon = Icons.schedule;
+    // }
+    List<String> date = selectedDate.split('-');
+    DateTime today =
+        DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    DateTime parsedDate =
+        DateTime(int.parse(dateStr[0]), int.parse(date[1]), int.parse(date[2]));
+
+    if (today == parsedDate) {
       if (isTaken) {
         takenTxt = 'Taken';
         takenIcon = Icons.done;

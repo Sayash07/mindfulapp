@@ -215,220 +215,376 @@ class _AddMedication4State extends State<AddMedication4> {
       },
     );
 
+    // try {
+    //   final snapshot1 = await FirebaseFirestore.instance
+    //       .collection('Users')
+    //       .doc(currentUser!.email)
+    //       .collection('Medications')
+    //       .add({});
+
+    //   String newID = snapshot1.id;
+    //   print('Created medication ID: $newID');
+
+    //   List<String> medtimesOriginal = times.text.split(', ');
+    //   List medtimes = List.filled(24, null);
+
+    //   //add time if available or null
+    //   for (int i = 0; i < medtimes.length; i++) {
+    //     if (medtimesOriginal.length > i) {
+    //       medtimes[i] = medtimesOriginal[i];
+    //     }
+    //   }
+
+    //   await FirebaseFirestore.instance
+    //       .collection('Users')
+    //       .doc(currentUser!.email)
+    //       .collection('Medications')
+    //       .doc(newID)
+    //       .set({
+    //     'medname': medname.text.isNotEmpty ? medname.text : null,
+    //     'category': category.text.isNotEmpty ? category.text : null,
+    //     'strength': strength.text.isNotEmpty ? int.parse(strength.text) : null,
+    //     'strength_unit':
+    //         strength_unit.text.isNotEmpty ? strength_unit.text : null,
+    //     'medcount': int.parse(medcount.text),
+    //     'total_med:':
+    //         total_med.text.isNotEmpty ? int.parse(total_med.text) : null,
+    //     // 'time1': medtimes[0],
+    //     // 'time2': medtimes[1],
+    //     // 'time3': medtimes[2],
+    //     // 'time4': medtimes[3],
+    //     // 'time5': medtimes[4],
+    //     // 'time6': medtimes[5],
+    //     // 'time7': medtimes[6],
+    //     // 'time8': medtimes[7],
+    //     // 'time9': medtimes[8],
+    //     // 'time10': medtimes[9],
+    //     // 'time11': medtimes[10],
+    //     // 'time12': medtimes[11],
+    //     // 'time13': medtimes[12],
+    //     // 'time14': medtimes[13],
+    //     // 'time15': medtimes[14],
+    //     // 'time16': medtimes[15],
+    //     // 'time17': medtimes[16],
+    //     // 'time18': medtimes[17],
+    //     // 'time19': medtimes[18],
+    //     // 'time20': medtimes[19],
+    //     // 'time21': medtimes[20],
+    //     // 'time22': medtimes[21],
+    //     // 'time23': medtimes[22],
+    //     // 'time24': medtimes[23],
+    //     'times': times12H.text,
+    //     'frequency': frequency.text.isNotEmpty ? frequency.text : null,
+    //     'start_date': start_date.text.isNotEmpty ? start_date.text : null,
+    //     'end_date': end_date.text.isNotEmpty ? end_date.text : null,
+    //     'user_note': user_note.text.isNotEmpty ? user_note.text : null,
+    //   });
+
+    //   print(translation(context).mAddedSuccess);
+
+    //   //adding days
+    //   List<String> days = [];
+
+    //   List start = start_date.text.split('-');
+    //   DateTime startDate = DateTime(
+    //       int.parse(start[0]), int.parse(start[1]), int.parse(start[2]));
+
+    //   //if end date is empty add 3 months from start date
+    //   end_date.text = end_date.text.isEmpty
+    //       ? end_date.text = startDate
+    //           .add(const Duration(days: 90))
+    //           .toString()
+    //           .substring(0, 10)
+    //       : end_date.text;
+
+    //   List end = end_date.text.split('-');
+    //   DateTime endDate =
+    //       DateTime(int.parse(end[0]), int.parse(end[1]), int.parse(end[2]));
+
+    //   if (isSpecificDays.text == "false") {
+    //     switch (frequency.text) {
+    //       case "Every Day":
+    //         for (int i = 0; i <= endDate.difference(startDate).inDays; i++) {
+    //           days.add(
+    //               startDate.add(Duration(days: i)).toString().substring(0, 10));
+    //         }
+    //         break;
+    //       case "Every 2 Days":
+    //         for (int i = 0;
+    //             i <= endDate.difference(startDate).inDays;
+    //             i = i + 2) {
+    //           days.add(
+    //               startDate.add(Duration(days: i)).toString().substring(0, 10));
+    //         }
+    //         break;
+    //       case "Every 3 Days":
+    //         for (int i = 0;
+    //             i <= endDate.difference(startDate).inDays;
+    //             i = i + 3) {
+    //           days.add(
+    //               startDate.add(Duration(days: i)).toString().substring(0, 10));
+    //         }
+    //         break;
+    //       case "Every 4 Days":
+    //         for (int i = 0;
+    //             i <= endDate.difference(startDate).inDays;
+    //             i = i + 4) {
+    //           days.add(
+    //               startDate.add(Duration(days: i)).toString().substring(0, 10));
+    //         }
+    //         break;
+    //       case "Every 5 Days":
+    //         for (int i = 0;
+    //             i <= endDate.difference(startDate).inDays;
+    //             i = i + 5) {
+    //           days.add(
+    //               startDate.add(Duration(days: i)).toString().substring(0, 10));
+    //         }
+    //         break;
+    //       case "Every 6 Days":
+    //         for (int i = 0;
+    //             i <= endDate.difference(startDate).inDays;
+    //             i = i + 6) {
+    //           days.add(
+    //               startDate.add(Duration(days: i)).toString().substring(0, 10));
+    //         }
+    //         break;
+    //       case "Every Week (7 Days)":
+    //         for (int i = 0;
+    //             i <= endDate.difference(startDate).inDays;
+    //             i = i + 7) {
+    //           days.add(
+    //               startDate.add(Duration(days: i)).toString().substring(0, 10));
+    //         }
+    //         break;
+    //       case "Every 2 Weeks (14 Days)":
+    //         for (int i = 0;
+    //             i <= endDate.difference(startDate).inDays;
+    //             i = i + 14) {
+    //           days.add(
+    //               startDate.add(Duration(days: i)).toString().substring(0, 10));
+    //         }
+    //         break;
+    //       case "Every 3 Weeks (21 Days)":
+    //         for (int i = 0;
+    //             i <= endDate.difference(startDate).inDays;
+    //             i = i + 21) {
+    //           days.add(
+    //               startDate.add(Duration(days: i)).toString().substring(0, 10));
+    //         }
+    //         break;
+    //       case "Every Month (30 Days)":
+    //         for (int i = 0;
+    //             i <= endDate.difference(startDate).inDays;
+    //             i = i + 30) {
+    //           days.add(
+    //               startDate.add(Duration(days: i)).toString().substring(0, 10));
+    //         }
+    //         break;
+    //       case "Every 2 Months (60 Days)":
+    //         for (int i = 0;
+    //             i <= endDate.difference(startDate).inDays;
+    //             i = i + 60) {
+    //           days.add(
+    //               startDate.add(Duration(days: i)).toString().substring(0, 10));
+    //         }
+    //         break;
+    //       case "Every 3 Month (90 Days)":
+    //         for (int i = 0;
+    //             i <= endDate.difference(startDate).inDays;
+    //             i = i + 90) {
+    //           days.add(
+    //               startDate.add(Duration(days: i)).toString().substring(0, 10));
+    //         }
+    //         break;
+    //     }
+    //   } else {
+    //     //spcific days logic
+    //     List<String> weekdaysStr = weeekdays_List.text.split(', ');
+    //     List<int> weekdays = weekdaysStr.map(int.parse).toList();
+    //     print(weekdays);
+    //     for (int i = 0; i <= endDate.difference(startDate).inDays; i++) {
+    //       for (var day in weekdays) {
+    //         if (startDate.add(Duration(days: i)).weekday == day) {
+    //           days.add(
+    //               startDate.add(Duration(days: i)).toString().substring(0, 10));
+    //         }
+    //       }
+    //     }
+    //   }
+
+    //   print(days);
+
+    //   // add collection logs
+
+    //   //adding days
+    //   for (var day in days) {
+    //     // final snapshot3 = await FirebaseFirestore.instance
+    //     //     .collection('Users')
+    //     //     .doc(currentUser!.email)
+    //     //     .collection('Medications')
+    //     //     .doc(newID)
+    //     //     .collection('Logs')
+    //     //     .doc(day)
+    //     //     .set({
+    //     //   'times': medtimes.toString(),
+    //     // });
+    //     for (var time in medtimesOriginal) {
+    //       List<String> dateStr = day.split('-');
+    //       List<String> timeStr = time.split(':');
+    //       DateTime dateTime = DateTime(
+    //           int.parse(dateStr[0]),
+    //           int.parse(dateStr[1]),
+    //           int.parse(dateStr[2]),
+    //           int.parse(timeStr[0]),
+    //           int.parse(timeStr[1]));
+
+    //       final snapshot2 = await FirebaseFirestore.instance
+    //           .collection('Users')
+    //           .doc(currentUser!.email)
+    //           .collection('Medications')
+    //           .doc(newID)
+    //           .collection('Logs')
+    //           .doc(dateTime.toString())
+    //           .set({
+    //         'isTaken': false,
+    //       });
+    //       print('created : $day - $time');
+    //     }
+    //   }
+    //   print(translation(context).aLDT);
+
+    //   if (!mounted) {
+    //     return;
+    //   }
+    //   //pop loading cicle
+    //   Navigator.of(context).pop();
+
+    //   //navigate to dashbaord
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => const Dashboard(),
+    //     ),
+    //   );
+    //   _showSnackBar(translation(context).mAddedSuccess);
+    // } on FirebaseException catch (e) {
+    //   print('ERROR: ${e.code}');
+    //   //pop loading cicle
+    //   Navigator.of(context).pop();
+    //   _showSnackBar('${e.message}');
+    // }
+
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
     try {
-      final snapshot1 = await FirebaseFirestore.instance
+      final docRef = firestore
           .collection('Users')
           .doc(currentUser!.email)
           .collection('Medications')
-          .add({});
+          .doc();
 
-      String newID = snapshot1.id;
+      String newID = docRef.id;
       print('Created medication ID: $newID');
 
       List<String> medtimesOriginal = times.text.split(', ');
       List medtimes = List.filled(24, null);
 
-      //add time if available or null
       for (int i = 0; i < medtimes.length; i++) {
         if (medtimesOriginal.length > i) {
           medtimes[i] = medtimesOriginal[i];
         }
       }
 
-      await FirebaseFirestore.instance
-          .collection('Users')
-          .doc(currentUser!.email)
-          .collection('Medications')
-          .doc(newID)
-          .set({
+      // Prepare medication data
+      Map<String, dynamic> medicationData = {
         'medname': medname.text.isNotEmpty ? medname.text : null,
         'category': category.text.isNotEmpty ? category.text : null,
         'strength': strength.text.isNotEmpty ? int.parse(strength.text) : null,
         'strength_unit':
             strength_unit.text.isNotEmpty ? strength_unit.text : null,
         'medcount': int.parse(medcount.text),
-        'total_med:':
+        'total_med':
             total_med.text.isNotEmpty ? int.parse(total_med.text) : null,
-        // 'time1': medtimes[0],
-        // 'time2': medtimes[1],
-        // 'time3': medtimes[2],
-        // 'time4': medtimes[3],
-        // 'time5': medtimes[4],
-        // 'time6': medtimes[5],
-        // 'time7': medtimes[6],
-        // 'time8': medtimes[7],
-        // 'time9': medtimes[8],
-        // 'time10': medtimes[9],
-        // 'time11': medtimes[10],
-        // 'time12': medtimes[11],
-        // 'time13': medtimes[12],
-        // 'time14': medtimes[13],
-        // 'time15': medtimes[14],
-        // 'time16': medtimes[15],
-        // 'time17': medtimes[16],
-        // 'time18': medtimes[17],
-        // 'time19': medtimes[18],
-        // 'time20': medtimes[19],
-        // 'time21': medtimes[20],
-        // 'time22': medtimes[21],
-        // 'time23': medtimes[22],
-        // 'time24': medtimes[23],
         'times': times12H.text,
         'frequency': frequency.text.isNotEmpty ? frequency.text : null,
         'start_date': start_date.text.isNotEmpty ? start_date.text : null,
         'end_date': end_date.text.isNotEmpty ? end_date.text : null,
         'user_note': user_note.text.isNotEmpty ? user_note.text : null,
-      });
+      };
+
+      // Add the medication document
+      await docRef.set(medicationData);
 
       print(translation(context).mAddedSuccess);
 
-      //adding days
+      // Generate days
       List<String> days = [];
-
-      List start = start_date.text.split('-');
-      DateTime startDate = DateTime(
-          int.parse(start[0]), int.parse(start[1]), int.parse(start[2]));
-
-      //if end date is empty add 3 months from start date
-      end_date.text = end_date.text.isEmpty
-          ? end_date.text = startDate
-              .add(const Duration(days: 90))
-              .toString()
-              .substring(0, 10)
-          : end_date.text;
-
-      List end = end_date.text.split('-');
-      DateTime endDate =
-          DateTime(int.parse(end[0]), int.parse(end[1]), int.parse(end[2]));
+      DateTime startDate = DateTime.parse(start_date.text);
+      DateTime endDate = end_date.text.isNotEmpty
+          ? DateTime.parse(end_date.text)
+          : startDate.add(const Duration(days: 90));
 
       if (isSpecificDays.text == "false") {
+        int interval = 1;
         switch (frequency.text) {
-          case "Every Day":
-            for (int i = 0; i <= endDate.difference(startDate).inDays; i++) {
-              days.add(
-                  startDate.add(Duration(days: i)).toString().substring(0, 10));
-            }
-            break;
           case "Every 2 Days":
-            for (int i = 0;
-                i <= endDate.difference(startDate).inDays;
-                i = i + 2) {
-              days.add(
-                  startDate.add(Duration(days: i)).toString().substring(0, 10));
-            }
+            interval = 2;
             break;
           case "Every 3 Days":
-            for (int i = 0;
-                i <= endDate.difference(startDate).inDays;
-                i = i + 3) {
-              days.add(
-                  startDate.add(Duration(days: i)).toString().substring(0, 10));
-            }
+            interval = 3;
             break;
           case "Every 4 Days":
-            for (int i = 0;
-                i <= endDate.difference(startDate).inDays;
-                i = i + 4) {
-              days.add(
-                  startDate.add(Duration(days: i)).toString().substring(0, 10));
-            }
+            interval = 4;
             break;
           case "Every 5 Days":
-            for (int i = 0;
-                i <= endDate.difference(startDate).inDays;
-                i = i + 5) {
-              days.add(
-                  startDate.add(Duration(days: i)).toString().substring(0, 10));
-            }
+            interval = 5;
             break;
           case "Every 6 Days":
-            for (int i = 0;
-                i <= endDate.difference(startDate).inDays;
-                i = i + 6) {
-              days.add(
-                  startDate.add(Duration(days: i)).toString().substring(0, 10));
-            }
+            interval = 6;
             break;
           case "Every Week (7 Days)":
-            for (int i = 0;
-                i <= endDate.difference(startDate).inDays;
-                i = i + 7) {
-              days.add(
-                  startDate.add(Duration(days: i)).toString().substring(0, 10));
-            }
+            interval = 7;
             break;
           case "Every 2 Weeks (14 Days)":
-            for (int i = 0;
-                i <= endDate.difference(startDate).inDays;
-                i = i + 14) {
-              days.add(
-                  startDate.add(Duration(days: i)).toString().substring(0, 10));
-            }
+            interval = 14;
             break;
           case "Every 3 Weeks (21 Days)":
-            for (int i = 0;
-                i <= endDate.difference(startDate).inDays;
-                i = i + 21) {
-              days.add(
-                  startDate.add(Duration(days: i)).toString().substring(0, 10));
-            }
+            interval = 21;
             break;
           case "Every Month (30 Days)":
-            for (int i = 0;
-                i <= endDate.difference(startDate).inDays;
-                i = i + 30) {
-              days.add(
-                  startDate.add(Duration(days: i)).toString().substring(0, 10));
-            }
+            interval = 30;
             break;
           case "Every 2 Months (60 Days)":
-            for (int i = 0;
-                i <= endDate.difference(startDate).inDays;
-                i = i + 60) {
-              days.add(
-                  startDate.add(Duration(days: i)).toString().substring(0, 10));
-            }
+            interval = 60;
             break;
           case "Every 3 Month (90 Days)":
-            for (int i = 0;
-                i <= endDate.difference(startDate).inDays;
-                i = i + 90) {
-              days.add(
-                  startDate.add(Duration(days: i)).toString().substring(0, 10));
-            }
+            interval = 90;
             break;
         }
+        for (int i = 0;
+            i <= endDate.difference(startDate).inDays;
+            i += interval) {
+          days.add(
+              startDate.add(Duration(days: i)).toString().substring(0, 10));
+        }
       } else {
-        //spcific days logic
-        List<String> weekdaysStr = weeekdays_List.text.split(', ');
-        List<int> weekdays = weekdaysStr.map(int.parse).toList();
-        print(weekdays);
+        List<int> weekdays =
+            weeekdays_List.text.split(', ').map(int.parse).toList();
         for (int i = 0; i <= endDate.difference(startDate).inDays; i++) {
-          for (var day in weekdays) {
-            if (startDate.add(Duration(days: i)).weekday == day) {
-              days.add(
-                  startDate.add(Duration(days: i)).toString().substring(0, 10));
-            }
+          DateTime currentDate = startDate.add(Duration(days: i));
+          if (weekdays.contains(currentDate.weekday)) {
+            days.add(currentDate.toString().substring(0, 10));
           }
         }
       }
 
       print(days);
 
-      // add collection logs
+      // Add logs using batch
+      WriteBatch batch = firestore.batch();
 
-      //adding days
       for (var day in days) {
-        // final snapshot3 = await FirebaseFirestore.instance
-        //     .collection('Users')
-        //     .doc(currentUser!.email)
-        //     .collection('Medications')
-        //     .doc(newID)
-        //     .collection('Logs')
-        //     .doc(day)
-        //     .set({
-        //   'times': medtimes.toString(),
-        // });
         for (var time in medtimesOriginal) {
           List<String> dateStr = day.split('-');
           List<String> timeStr = time.split(':');
@@ -439,28 +595,20 @@ class _AddMedication4State extends State<AddMedication4> {
               int.parse(timeStr[0]),
               int.parse(timeStr[1]));
 
-          final snapshot2 = await FirebaseFirestore.instance
-              .collection('Users')
-              .doc(currentUser!.email)
-              .collection('Medications')
-              .doc(newID)
-              .collection('Logs')
-              .doc(dateTime.toString())
-              .set({
-            'isTaken': false,
-          });
+          DocumentReference logRef =
+              docRef.collection('Logs').doc(dateTime.toString());
+          batch.set(logRef, {'isTaken': false});
           print('created : $day - $time');
         }
       }
+
+      await batch.commit();
+
       print(translation(context).aLDT);
 
-      if (!mounted) {
-        return;
-      }
-      //pop loading cicle
-      Navigator.of(context).pop();
+      if (!mounted) return;
 
-      //navigate to dashbaord
+      Navigator.of(context).pop();
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -470,7 +618,6 @@ class _AddMedication4State extends State<AddMedication4> {
       _showSnackBar(translation(context).mAddedSuccess);
     } on FirebaseException catch (e) {
       print('ERROR: ${e.code}');
-      //pop loading cicle
       Navigator.of(context).pop();
       _showSnackBar('${e.message}');
     }

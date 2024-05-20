@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCfaSyFSn1YzXGjcuHHUfBhP4wXrGXsn-A',
-    appId: '1:1072054298146:android:3c3374704d9078ccb44c7b',
-    messagingSenderId: '1072054298146',
-    projectId: 'medicationaitc',
-    storageBucket: 'medicationaitc.appspot.com',
+    apiKey: 'AIzaSyCaBO5CtUd12aRBWmE-J6Q_nNRILb13TPY',
+    appId: '1:579594683262:android:983d3a73d8e551dc25e92f',
+    messagingSenderId: '579594683262',
+    projectId: 'mindfulmeds-3143c',
+    storageBucket: 'mindfulmeds-3143c.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAt-5cGkJaxBgUJFF3UHgNIuvBvwcrQ9xw',
-    appId: '1:1072054298146:ios:52c4600756180617b44c7b',
-    messagingSenderId: '1072054298146',
-    projectId: 'medicationaitc',
-    storageBucket: 'medicationaitc.appspot.com',
+    apiKey: 'AIzaSyDMDOmWqPNX4hrP3QGJn3ZOjyzDGBk0KyI',
+    appId: '1:579594683262:ios:b53e20fff7741be025e92f',
+    messagingSenderId: '579594683262',
+    projectId: 'mindfulmeds-3143c',
+    storageBucket: 'mindfulmeds-3143c.appspot.com',
     iosBundleId: 'health.mymeds.app.mymedsApp',
   );
 

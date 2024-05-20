@@ -105,6 +105,7 @@ class _MediactionState extends State<Mediaction> {
       //   // backgroundColor: Color.fromARGB(163, 206, 240, 247)
       //   // backgroundColor: Colors.white,
       // ),
+      floatingActionButton: isFABvisible ? returnFAB() : null,
       body: Column(
         children: [
           //app logo and user icon

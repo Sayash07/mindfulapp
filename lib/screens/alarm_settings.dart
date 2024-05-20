@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:alarm/alarm.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mymeds_app/screens/homepage2.dart';
 import '../components/alarm_tile.dart';
 import '../components/language_constants.dart';
 import 'add_medication1.dart';
-import 'alarm_ring.dart';
 
 class AlarmSettingsPage extends StatefulWidget {
   const AlarmSettingsPage({Key? key}) : super(key: key);
@@ -40,7 +40,8 @@ class _AlarmSettingsPageState extends State<AlarmSettingsPage> {
     await Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => AlarmScreen(alarmSettings: alarmSettings),
+          // builder: (context) => AlarmScreen(alarmSettings: alarmSettings),
+          builder: (context) => const HomePage2(),
         ));
     loadAlarms();
   }

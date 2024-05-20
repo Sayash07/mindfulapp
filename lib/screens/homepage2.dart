@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:alarm/alarm.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -675,6 +676,7 @@ class _HomePage2State extends State<HomePage2> {
                                           CalendarDateTime>(
                                       valueListenable: _selectedDate,
                                       builder: (context, value, child) {
+                                        log('Card ${timeIds[index]} built');
                                         return MedCard(
                                           documentID: docIds[index],
                                           dateID: dateIds[index],

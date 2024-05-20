@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:maps_launcher/maps_launcher.dart';
+import 'package:mymeds_app/screens/pressure.dart';
 import '../components/language_constants.dart';
 import 'account_settings.dart';
 import 'alarm_settings.dart';
@@ -333,7 +334,7 @@ class _SettingsState extends State<More> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return const AlarmSettingsPage();
+                                  return BloodPressureScreen();
                                 },
                               ),
                             );
@@ -362,19 +363,19 @@ class _SettingsState extends State<More> {
                               ),
                             ),
                           ),
-                          child: Column(
+                          child: const Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const SizedBox(
+                              SizedBox(
                                 height: 5,
                               ),
-                              const Icon(
-                                Icons.alarm_rounded,
+                              Icon(
+                                Icons.bloodtype_outlined,
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 height: 10,
                               ),
-                              Text(translation(context).upalarm,
+                              Text('Blood Pressure',
                                   textAlign: TextAlign.center),
                             ],
                           ),
@@ -427,6 +428,62 @@ class _SettingsState extends State<More> {
                                 height: 10,
                               ),
                               Text(translation(context).emgcall,
+                                  textAlign: TextAlign.center),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.12,
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        child: FilledButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return const AlarmSettingsPage();
+                                },
+                              ),
+                            );
+                            // ScaffoldMessenger.of(context).showSnackBar(
+                            //   const SnackBar(
+                            //     backgroundColor:
+                            //         Color.fromARGB(255, 7, 83, 96),
+                            //     behavior: SnackBarBehavior.floating,
+                            //     duration: Duration(seconds: 2),
+                            //     content: Text(
+                            //       'Coming soon...',
+                            //     ),
+                            //   ),
+                            // );
+                          },
+                          style: const ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll(
+                                Color.fromARGB(255, 217, 237, 239)),
+                            foregroundColor: MaterialStatePropertyAll(
+                                Color.fromRGBO(7, 82, 96, 1)),
+                            shape: MaterialStatePropertyAll(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
+                                ),
+                              ),
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              const Icon(
+                                Icons.alarm_rounded,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(translation(context).upalarm,
                                   textAlign: TextAlign.center),
                             ],
                           ),

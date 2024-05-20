@@ -34,23 +34,23 @@ class _DashboardState extends State<Dashboard> {
 
   static StreamSubscription? subscription;
 
-  void loadAlarms() {
-    setState(() {
-      alarms = Alarm.getAlarms();
-      alarms.sort((a, b) => a.dateTime.isBefore(b.dateTime) ? 0 : 1);
-    });
-  }
+  // void loadAlarms() {
+  //   setState(() {
+  //     alarms = Alarm.getAlarms();
+  //     alarms.sort((a, b) => a.dateTime.isBefore(b.dateTime) ? 0 : 1);
+  //   });
+  // }
 
 //show alarm ring screen
-  Future<void> navigateToRingScreen(AlarmSettings alarmSettings) async {
-    print('Opened ring screen');
-    await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => AlarmScreen(alarmSettings: alarmSettings),
-        ));
-    loadAlarms();
-  }
+  // Future<void> navigateToRingScreen(AlarmSettings alarmSettings) async {
+  //   print('Opened ring screen');
+  //   await Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (context) => AlarmScreen(alarmSettings: alarmSettings),
+  //       ));
+  //   loadAlarms();
+  // }
 
   // // documnet IDs
   // List<String> docIDs = [];
@@ -69,10 +69,10 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   void initState() {
-    loadAlarms();
-    subscription ??= Alarm.ringStream.stream.listen(
-      (alarmSettings) => navigateToRingScreen(alarmSettings),
-    );
+    // loadAlarms();
+    // subscription ??= Alarm.ringStream.stream.listen(
+    //   (alarmSettings) => navigateToRingScreen(alarmSettings),
+    // );
     super.initState();
   }
 
@@ -102,36 +102,36 @@ class _DashboardState extends State<Dashboard> {
         ),
       ),
       //floating action button
-      floatingActionButton: isFABvisible
-          ? FloatingActionButton(
-              onPressed: () {
-                !chatBot
-                    ? Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AddMedication1(),
-                        ),
-                      )
-                    : Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ChatBot(),
-                        ),
-                      );
-              },
-              // shape: const RoundedRectangleBorder(
-              //   borderRadius: BorderRadius.all(
-              //     Radius.circular(50.0),
-              //   ),
-              // ),
+      // floatingActionButton: isFABvisible
+      //     ? FloatingActionButton(
+      //         onPressed: () {
+      //           !chatBot
+      //               ? Navigator.push(
+      //                   context,
+      //                   MaterialPageRoute(
+      //                     builder: (context) => AddMedication1(),
+      //                   ),
+      //                 )
+      //               : Navigator.push(
+      //                   context,
+      //                   MaterialPageRoute(
+      //                     builder: (context) => ChatBot(),
+      //                   ),
+      //                 );
+      //         },
+      //         // shape: const RoundedRectangleBorder(
+      //         //   borderRadius: BorderRadius.all(
+      //         //     Radius.circular(50.0),
+      //         //   ),
+      //         // ),
 
-              backgroundColor: const Color.fromARGB(255, 14, 149, 173),
-              foregroundColor: Theme.of(context).colorScheme.background,
-              child: !chatBot
-                  ? const Icon(Icons.add)
-                  : const Icon(Icons.smart_toy_outlined),
-            )
-          : null,
+      //         backgroundColor: const Color.fromARGB(255, 14, 149, 173),
+      //         foregroundColor: Theme.of(context).colorScheme.background,
+      //         child: !chatBot
+      //             ? const Icon(Icons.add)
+      //             : const Icon(Icons.smart_toy_outlined),
+      //       )
+      //     : null,
       // floatingActionButtonLocation:
       //     FloatingActionButtonLocation.miniCenterDocked,
       //bottom navigation

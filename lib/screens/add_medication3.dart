@@ -895,13 +895,6 @@ class _AddMedication3State extends State<AddMedication3> {
                             fontSize: 18,
                             fontWeight: FontWeight.w600),
                       ),
-                      Text(
-                        translation(context).optional,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                        ),
-                      ),
                     ],
                   ),
                   TextButton(
@@ -913,7 +906,12 @@ class _AddMedication3State extends State<AddMedication3> {
                 ],
               ),
               const SizedBox(height: 16),
-              TextField(
+              TextFormField(
+                onChanged: (value) {
+                  setState(() {
+                    _medicationEndingDateController.text = value;
+                  });
+                },
                 onTap: () async {
                   final DateTime? pickedEndDate = await showDatePicker(
                     context: context,
@@ -960,6 +958,12 @@ class _AddMedication3State extends State<AddMedication3> {
                     ),
                   ),
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'This field is required';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 40),
               SizedBox(

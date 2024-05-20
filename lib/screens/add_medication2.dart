@@ -38,10 +38,25 @@ class _AddMedication2State extends State<AddMedication2> {
   late FocusNode focusNode_totalPill;
   late FocusNode focusNode_note;
 
+  void goToPreviousPage() {
+    Navigator.pop(context);
+  }
+
+  void _resetForm() {
+    _formKey.currentState?.reset();
+    _medicationDosageController.clear();
+    _medicationCountController.clear();
+    _medicationNoteController.clear();
+    setState(() {
+      isPillCountRequired = false;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     widget._getInitialInfo();
+    _resetForm();
     focusNode_dosage = FocusNode();
     focusNode_note = FocusNode();
     focusNode_totalPill = FocusNode();
@@ -69,7 +84,7 @@ class _AddMedication2State extends State<AddMedication2> {
           MaterialPageRoute(
             builder: (context) => const AddMedication3(),
           ),
-        );
+        ).then((value) => _resetForm());
       }
     }
   }
