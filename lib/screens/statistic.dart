@@ -32,72 +32,6 @@ class _StatisticState extends State<Statistic> {
   late Color takenColor; // Color for the "Taken" series
   late Color missedColor; // Color for the "Missed" series
 
-  // Future getDailyUsage() async {
-  //   _chartData = [];
-  //   taken = 0;
-  //   missed = 0;
-
-  //   final snapshot = await FirebaseFirestore.instance
-  //       .collection('Users')
-  //       .doc(currentUser!.email)
-  //       .collection('Medications')
-  //       .get(const GetOptions(source: Source.serverAndCache));
-
-  //   for (final document in snapshot.docs) {
-  //     final snapshot1 = await FirebaseFirestore.instance
-  //         .collection('Users')
-  //         .doc(currentUser!.email)
-  //         .collection('Medications')
-  //         .doc(document.reference.id)
-  //         .collection('Logs')
-  //         .get(const GetOptions(source: Source.serverAndCache));
-
-  //     for (final document1 in snapshot1.docs) {
-  //       // print('Date ID: ${document1.reference.id}');
-  //       List<String> dateTime = document1.reference.id.split(' ');
-  //       //check today
-  //       List<String> date = dateTime[0].split('-');
-  //       int year = int.parse(date[0]);
-  //       int month = int.parse(date[1]);
-  //       int day = int.parse(date[2]);
-  //       final now = DateTime.now();
-
-  //       if (DateTime(year, month, day) ==
-  //           DateTime(now.year, now.month, now.day)) {
-  //         final snapshot2 = await FirebaseFirestore.instance
-  //             .collection('Users')
-  //             .doc(currentUser!.email)
-  //             .collection('Medications')
-  //             .doc(document.reference.id)
-  //             .collection('Logs')
-  //             .doc(document1.reference.id)
-  //             .get(const GetOptions(source: Source.serverAndCache));
-
-  //         Map<String, dynamic>? logData = snapshot2.data() != null
-  //             ? snapshot2.data() as Map<String, dynamic>
-  //             : <String, dynamic>{};
-  //         bool? isTaken = logData['isTaken'];
-  //         if (isTaken!) {
-  //           taken++;
-  //         } else {
-  //           missed++;
-  //         }
-  //       }
-  //     }
-  //   }
-  //   _chartData = [
-  //     GDPData('Taken', taken),
-  //     GDPData('Skipped', missed),
-  //   ];
-  //   print('Taken: $taken');
-  //   print('Missed: $missed');
-
-  //   if (taken == 0 && missed == 0) {
-  //     setState(() {
-  //       isDailyEmpty = true;
-  //     });
-  //   }
-  // }
   Future getDailyUsage() async {
     _chartData = [];
     taken = 0;
@@ -109,27 +43,48 @@ class _StatisticState extends State<Statistic> {
         .collection('Medications')
         .get(const GetOptions(source: Source.serverAndCache));
 
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-
     for (final document in snapshot.docs) {
-      final logsSnapshot = await FirebaseFirestore.instance
+      final snapshot1 = await FirebaseFirestore.instance
           .collection('Users')
           .doc(currentUser!.email)
           .collection('Medications')
           .doc(document.reference.id)
           .collection('Logs')
-          .where('date', isEqualTo: today)
           .get(const GetOptions(source: Source.serverAndCache));
 
-      for (final logDocument in logsSnapshot.docs) {
-        bool? isTaken = logDocument.data()['isTaken'];
-        if (isTaken != null) {
-          isTaken ? taken++ : missed++;
+      for (final document1 in snapshot1.docs) {
+        // print('Date ID: ${document1.reference.id}');
+        List<String> dateTime = document1.reference.id.split(' ');
+        //check today
+        List<String> date = dateTime[0].split('-');
+        int year = int.parse(date[0]);
+        int month = int.parse(date[1]);
+        int day = int.parse(date[2]);
+        final now = DateTime.now();
+
+        if (DateTime(year, month, day) ==
+            DateTime(now.year, now.month, now.day)) {
+          final snapshot2 = await FirebaseFirestore.instance
+              .collection('Users')
+              .doc(currentUser!.email)
+              .collection('Medications')
+              .doc(document.reference.id)
+              .collection('Logs')
+              .doc(document1.reference.id)
+              .get(const GetOptions(source: Source.serverAndCache));
+
+          Map<String, dynamic>? logData = snapshot2.data() != null
+              ? snapshot2.data() as Map<String, dynamic>
+              : <String, dynamic>{};
+          bool? isTaken = logData['isTaken'];
+          if (isTaken!) {
+            taken++;
+          } else {
+            missed++;
+          }
         }
       }
     }
-
     _chartData = [
       GDPData('Taken', taken),
       GDPData('Skipped', missed),
@@ -143,6 +98,51 @@ class _StatisticState extends State<Statistic> {
       });
     }
   }
+  // Future getDailyUsage() async {
+  //   _chartData = [];
+  //   taken = 0;
+  //   missed = 0;
+
+  //   final snapshot = await FirebaseFirestore.instance
+  //       .collection('Users')
+  //       .doc(currentUser!.email)
+  //       .collection('Medications')
+  //       .get(const GetOptions(source: Source.serverAndCache));
+
+  //   final now = DateTime.now();
+  //   final today = DateTime(now.year, now.month, now.day);
+
+  //   for (final document in snapshot.docs) {
+  //     final logsSnapshot = await FirebaseFirestore.instance
+  //         .collection('Users')
+  //         .doc(currentUser!.email)
+  //         .collection('Medications')
+  //         .doc(document.reference.id)
+  //         .collection('Logs')
+  //         .where('date', isEqualTo: today)
+  //         .get(const GetOptions(source: Source.serverAndCache));
+
+  //     for (final logDocument in logsSnapshot.docs) {
+  //       bool? isTaken = logDocument.data()['isTaken'];
+  //       if (isTaken != null) {
+  //         isTaken ? taken++ : missed++;
+  //       }
+  //     }
+  //   }
+
+  //   _chartData = [
+  //     GDPData('Taken', taken),
+  //     GDPData('Skipped', missed),
+  //   ];
+  //   print('Taken: $taken');
+  //   print('Missed: $missed');
+
+  //   if (taken == 0 && missed == 0) {
+  //     setState(() {
+  //       isDailyEmpty = true;
+  //     });
+  //   }
+  // }
 
   Future getWeeklyUsage() async {
     data = [];

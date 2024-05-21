@@ -32,6 +32,35 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
       }
 
       setState(() {});
+
+      _systolicController.clear();
+      _diastolicController.clear();
+      showModalBottomSheet(
+          isScrollControlled: true,
+          context: context,
+          builder: (context) => Container(
+                height: 300,
+                width: MediaQuery.of(context).size.width,
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Image(
+                        image: NetworkImage(
+                            'https://icons.veryicon.com/png/o/miscellaneous/sugar-nurse/blood-pressure-7.png'),
+                        height: 100),
+                    const SizedBox(height: 16.0),
+                    Text(
+                      _result,
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                    const SizedBox(height: 16.0),
+                  ],
+                ),
+              ));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please enter valid values')),
@@ -120,17 +149,18 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                   textColor: Colors.white,
                 ),
                 const SizedBox(height: 20),
-                Text(
-                  "You have $_result.",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: _result == 'Normal Blood Pressure'
-                        ? Colors.green
-                        : Colors.red,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
+                // if (_result != '')
+                // Text(
+                //   "You have $_result.",
+                //   style: TextStyle(
+                //     fontSize: 24,
+                //     fontWeight: FontWeight.bold,
+                //     color: _result == 'Normal Blood Pressure'
+                //         ? Colors.green
+                //         : Colors.red,
+                //   ),
+                //   textAlign: TextAlign.center,
+                // ),
               ],
             ),
           ),

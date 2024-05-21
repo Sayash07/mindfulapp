@@ -67,6 +67,9 @@ class MedCard2 extends StatelessWidget {
     }
   }
 
+  int lastTap = DateTime.now().millisecondsSinceEpoch;
+  int consecutiveTaps = 0;
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -87,6 +90,27 @@ class MedCard2 extends StatelessWidget {
                 ? '${medData['strength']} ${medData['strength_unit']}'
                 : null;
             return GestureDetector(
+              onTap: () {
+                int now = DateTime.now().millisecondsSinceEpoch;
+                if (now - lastTap < 1000) {
+                  print("Consecutive tap");
+                  consecutiveTaps++;
+                  print("taps = $consecutiveTaps");
+                  if (consecutiveTaps >= 1) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Long tap to delete medication'),
+                        backgroundColor: Color.fromARGB(255, 46, 143, 202),
+                        behavior: SnackBarBehavior.floating,
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  }
+                } else {
+                  consecutiveTaps = 0;
+                }
+                lastTap = now;
+              },
               onLongPress: () {
                 showDialog(
                   context: context,
@@ -140,8 +164,9 @@ class MedCard2 extends StatelessWidget {
                 );
               },
               child: Container(
-                margin: const EdgeInsets.all(15.0),
-                padding: const EdgeInsets.all(20),
+                margin: const EdgeInsets.all(5.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: const Color.fromARGB(255, 76, 112, 117),
@@ -157,16 +182,18 @@ class MedCard2 extends StatelessWidget {
                   children: [
                     //category icon
                     Container(
-                      width: 50,
-                      height: 50,
+                      width: 70,
+                      height: 70,
                       decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.surface,
                         shape: BoxShape.circle,
                       ),
+                      clipBehavior: Clip.hardEdge,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Image.asset(
                           categoryImagePath(category!),
+                          fit: BoxFit.fill,
                         ),
                       ),
                     ),
@@ -222,13 +249,16 @@ class MedCard2 extends StatelessWidget {
                           height: 5,
                         ),
                         //times
-                        Text(
-                          times!,
-                          maxLines: 8,
-                          overflow: TextOverflow.clip,
-                          style: GoogleFonts.roboto(
-                            fontSize: 15,
-                            color: Theme.of(context).colorScheme.surface,
+                        SizedBox(
+                          width: 200,
+                          child: Text(
+                            times!,
+                            maxLines: 8,
+                            overflow: TextOverflow.clip,
+                            style: GoogleFonts.roboto(
+                              fontSize: 15,
+                              color: Theme.of(context).colorScheme.surface,
+                            ),
                           ),
                         ),
                       ],
