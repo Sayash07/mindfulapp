@@ -96,7 +96,7 @@ class MedCard2 extends StatelessWidget {
                   print("Consecutive tap");
                   consecutiveTaps++;
                   print("taps = $consecutiveTaps");
-                  if (consecutiveTaps >= 1) {
+                  if (consecutiveTaps >= 2) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('Long tap to delete medication'),

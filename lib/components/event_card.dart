@@ -107,23 +107,44 @@ class EventCard extends StatelessWidget {
     //   takenTxt = 'Not yet';
     //   takenIcon = Icons.schedule;
     // }
+
     List<String> date = selectedDate.split('-');
     DateTime today =
         DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-    DateTime parsedDate =
-        DateTime(int.parse(dateStr[0]), int.parse(date[1]), int.parse(date[2]));
+    DateTime parsedDate = DateTime(
+      int.parse(dateStr[0]),
+      int.parse(date[1]),
+      int.parse(date[2]),
+      int.parse(time24H.split(':')[0]),
+      int.parse(time24H.split(':')[1]),
+    );
+
+    log(parsedDate.toString());
+
+    medications.doc(documentID).get().then((value) {
+      log(value.data().toString());
+    });
 
     if (today == parsedDate) {
+      log('here');
       if (isTaken) {
         takenTxt = 'Taken';
         takenIcon = Icons.done;
-      } else {
+      } else if (parsedDate.isAfter(DateTime.now())) {
         takenTxt = 'Missed';
         takenIcon = Icons.close;
+      } else {
+        takenTxt = 'Not yet';
+        takenIcon = Icons.schedule;
       }
     } else {
-      takenTxt = 'Not yet';
-      takenIcon = Icons.schedule;
+      if (parsedDate.isBefore(DateTime.now())) {
+        takenTxt = 'Missed';
+        takenIcon = Icons.close;
+      } else {
+        takenTxt = 'Not yet';
+        takenIcon = Icons.schedule;
+      }
     }
 
     Future takeMed() async {

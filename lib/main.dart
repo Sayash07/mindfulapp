@@ -80,8 +80,15 @@ class _MyAppState extends State<MyApp> {
         // scaffoldBackgroundColor: Colors.white,
         scaffoldBackgroundColor: const Color.fromRGBO(241, 250, 251, 1),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 241, 244, 244),
-        ),
+            backgroundColor: Color.fromARGB(255, 241, 244, 244),
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Color.fromARGB(255, 241, 244, 244),
+              statusBarIconBrightness: Brightness.dark,
+              statusBarBrightness: Brightness.light,
+              systemNavigationBarColor: Color.fromARGB(44, 5, 104, 50),
+              systemNavigationBarIconBrightness: Brightness.dark,
+              systemNavigationBarDividerColor: Colors.white,
+            )),
         // colorSchemeSeed: const Color.fromRGBO(7, 82, 96, 1),
         colorSchemeSeed: const Color.fromARGB(255, 5, 104, 50),
       ),

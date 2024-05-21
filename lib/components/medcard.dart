@@ -73,7 +73,7 @@ class MedCard extends StatelessWidget {
                           print('No medications for $selectedDate');
                           return const Text('');
                         } else {
-                          // print('${logData['isTaken']}');
+                          print('${logData['isTaken']}');
                           // print(
                           // '${med_data['medname']} ${med_data['strength']} ${med_data['strength_unit']}');
                           List<String> time = timeID.toString().split(':');

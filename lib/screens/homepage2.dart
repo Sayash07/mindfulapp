@@ -7,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_timeline_calendar/timeline/flutter_timeline_calendar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:mymeds_app/screens/alarm_ring.dart';
 import '../components/language_constants.dart';
 import '../components/medcard.dart';
 import 'account_settings.dart';
@@ -186,9 +188,9 @@ class _HomePage2State extends State<HomePage2> {
     super.initState();
     setAlarms();
     // loadAlarms();
-    // subscription ??= Alarm.ringStream.stream.listen(
-    //   (alarmSettings) => navigateToRingScreen(alarmSettings),
-    // );
+    subscription ??= Alarm.ringStream.stream.listen(
+      (alarmSettings) => navigateToRingScreen(alarmSettings),
+    );
 
     // AwesomeNotifications().setListeners(
     //   onActionReceivedMethod: onActionReceivedMethod,
@@ -197,7 +199,7 @@ class _HomePage2State extends State<HomePage2> {
     //   onDismissActionReceivedMethod: onDismissActionReceivedMethod,
     // );
 
-    //notification permission check
+    // notification permission check
     // AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
     //   if (!isAllowed) {
     //     showDialog(
@@ -251,23 +253,50 @@ class _HomePage2State extends State<HomePage2> {
     // });
   }
 
-//   void loadAlarms() {
-//     setState(() {
-//       alarms = Alarm.getAlarms();
-//       alarms.sort((a, b) => a.dateTime.isBefore(b.dateTime) ? 0 : 1);
-//     });
-//   }
+  void loadAlarms() {
+    setState(() {
+      alarms = Alarm.getAlarms();
+      alarms.sort((a, b) => a.dateTime.isBefore(b.dateTime) ? 0 : 1);
+    });
+  }
 
-// //show alarm ring screen
-//   Future<void> navigateToRingScreen(AlarmSettings alarmSettings) async {
-//     print('Opened ring screen');
-//     await Navigator.push(
-//         context,
-//         MaterialPageRoute(
-//           builder: (context) => AlarmScreen(alarmSettings: alarmSettings),
-//         ));
-//     loadAlarms();
-//   }
+//show alarm ring screen
+  Future<void> navigateToRingScreen(AlarmSettings alarmSettings) async {
+    print('Opened ring screen');
+
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   SnackBar(
+    //     content: const Text('Dissmiss your '),
+    //     action: SnackBarAction(
+    //       label: 'Snooze',
+    //       onPressed: () {
+    //         final now = DateTime.now();
+    //         Alarm.set(
+    //           alarmSettings: alarmSettings.copyWith(
+    //             dateTime: DateTime(
+    //               now.year,
+    //               now.month,
+    //               now.day,
+    //               now.hour,
+    //               now.minute,
+    //               0,
+    //               0,
+    //             ).add(const Duration(minutes: 1)),
+    //           ),
+    //         ).then((_) => Navigator.pop(context));
+    //       },
+    //     ),
+    //     duration: const Duration(seconds: 2),
+    //   ),
+    // );
+
+    await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AlarmScreen(alarmSettings: alarmSettings),
+        ));
+    loadAlarms();
+  }
 
 //notification action buttons click
   // Future<void> onActionReceivedMethod(
@@ -485,9 +514,10 @@ class _HomePage2State extends State<HomePage2> {
                   children: [
                     //title
                     Text(
-                      _selectedDate.value.toString().substring(0, 10),
+                      DateFormat('MMM, dd').format(DateTime.parse(
+                          _selectedDate.value.toString().substring(0, 10))),
                       style: GoogleFonts.roboto(
-                        fontSize: 25,
+                        fontSize: 20,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
