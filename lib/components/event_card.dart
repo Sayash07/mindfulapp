@@ -109,8 +109,8 @@ class EventCard extends StatelessWidget {
     // }
 
     List<String> date = selectedDate.split('-');
-    DateTime today =
-        DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    DateTime today = DateTime(
+        DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 0);
     DateTime parsedDate = DateTime(
       int.parse(dateStr[0]),
       int.parse(date[1]),
@@ -131,19 +131,24 @@ class EventCard extends StatelessWidget {
         takenTxt = 'Taken';
         takenIcon = Icons.done;
       } else if (parsedDate.isAfter(DateTime.now())) {
-        takenTxt = 'Missed';
+        takenTxt = 'Taken';
         takenIcon = Icons.close;
       } else {
         takenTxt = 'Not yet';
         takenIcon = Icons.schedule;
       }
     } else {
-      if (parsedDate.isBefore(DateTime.now())) {
-        takenTxt = 'Missed';
-        takenIcon = Icons.close;
+      if (isTaken) {
+        takenTxt = 'Taken';
+        takenIcon = Icons.done;
       } else {
-        takenTxt = 'Not yet';
-        takenIcon = Icons.schedule;
+        if (parsedDate.isBefore(DateTime.now())) {
+          takenTxt = 'Missed';
+          takenIcon = Icons.close;
+        } else {
+          takenTxt = 'Not yet';
+          takenIcon = Icons.schedule;
+        }
       }
     }
 
